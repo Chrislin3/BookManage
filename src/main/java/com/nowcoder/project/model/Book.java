@@ -18,6 +18,13 @@ public class Book {
    */
   private int status;
 
+//  public Book(String name, String author, String price, int status) {
+//    this.name = name;
+//    this.author = author;
+//    this.price = price;
+//    this.status = status;
+//  }
+
   public int getId() {
     return id;
   }

@@ -21,12 +21,23 @@ public class BookService {
     return bookDAO.selectAll();
   }
 
+  public Book getBookById(int id) {
+    return bookDAO.selectBookById(id);
+  }
+
   public int addBooks(Book book) {
     return bookDAO.addBook(book);
   }
 
   public void deleteBooks(int id) {
     bookDAO.updateBookStatus(id, BookStatusEnum.DELETE.getValue());
+  }
+  public void editBooks(int id) {
+    bookDAO.updateBookStatus(id, BookStatusEnum.DELETE.getValue());
+  }
+
+  public void editBooksInfo(Book book) {
+    bookDAO.updateBookInfo(book);
   }
 
   public void recoverBooks(int id) {

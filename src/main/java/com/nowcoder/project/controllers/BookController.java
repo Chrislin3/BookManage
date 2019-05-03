@@ -31,7 +31,7 @@ public class BookController {
     if (host != null) {
       model.addAttribute("host", host);
     }
-    loadAllBooksView(model);
+    model.addAttribute("books", bookService.getAllBooks());
     return "book/books";
 
   }
@@ -41,6 +41,14 @@ public class BookController {
     return "book/addbook";
   }
 
+  @RequestMapping(path = {"/books/edit/{id}"}, method = {RequestMethod.GET})
+  public String editBook(
+     @PathVariable("id") int id,Model model
+  ) {
+    Book book = bookService.getBookById(id);
+    model.addAttribute("book", book);
+    return "book/editbook";
+  }
 
   @RequestMapping(path = {"/books/add/do"}, method = {RequestMethod.POST})
   public String doAddBook(
@@ -54,6 +62,23 @@ public class BookController {
     book.setAuthor(author);
     book.setPrice(price);
     bookService.addBooks(book);
+
+    return "redirect:/index";
+
+  }
+  @RequestMapping(path = {"/books/edit/do/{id}"}, method = {RequestMethod.POST})
+  public String doEditBook(
+          @PathVariable("id") int id,
+          @RequestParam("name") String name,
+          @RequestParam("author") String author,
+          @RequestParam("price") String price
+  ) {
+
+    Book book = bookService.getBookById(id);
+    book.setName(name);
+    book.setAuthor(author);
+    book.setPrice(price);
+    bookService.editBooksInfo(book);
 
     return "redirect:/index";
 
@@ -82,8 +107,8 @@ public class BookController {
   /**
    * 为model加载所有的book
    */
-  private void loadAllBooksView(Model model) {
-    model.addAttribute("books", bookService.getAllBooks());
-  }
+//  private void loadAllBooksView(Model model) {
+//    model.addAttribute("books", bookService.getAllBooks());
+//  }
 
 }

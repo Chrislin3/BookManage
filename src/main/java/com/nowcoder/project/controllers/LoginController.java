@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by nowcoder on 2018/08/07 下午2:14
@@ -26,12 +23,12 @@ public class LoginController {
   @Autowired
   private UserService userService;
 
-  @RequestMapping(path = {"/users/register"}, method = {RequestMethod.GET})
+  @GetMapping("/users/register")
   public String register() {
     return "login/register";
   }
 
-  @RequestMapping(path = {"/users/register/do"}, method = {RequestMethod.POST})
+  @PostMapping(value = {"/users/register/do"})
   public String doRegister(
       Model model,
       HttpServletResponse response,
